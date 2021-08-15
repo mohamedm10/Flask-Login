@@ -82,7 +82,8 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             return redirect(url_for('profile'))
-        flash('Invalid email or password')    
+    flash('Invalid email or password')
+    form.email.data = ''        
     return render_template('login.html', form=form)    
 
 @app.route('/register', methods=['GET', 'POST'])
