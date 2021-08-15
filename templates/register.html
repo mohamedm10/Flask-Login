@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+
+{% block title %} Users Page {% endblock %}
+
+{% block content %}
+<div class="container">
+       {% block flash %} {{ message }} {% endblock %}  
+    <h1>Registration Page</h1>
+{% block page_content %} 
+
+<form  method="post">
+{{form.hidden_tag()}}
+{{form.email.label}} {{form.email()}}
+<br>
+{{form.password.label}} {{form.password()}}
+<br>
+{{form.password2.label}} {{form.password2()}}
+<br>
+{{form.submit()}}
+</form>
+  
+
+{% endblock %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html"%}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% block flash %} {{ message }} {% endblock %}
+    <h1>Home</h1>
+{% block page_content %} <p>Hello, Welcome to the home page!!!</p>  {% endblock %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html"%}
+
+{% block title %} Login Page {% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+        {% block flash %} {{ message }} {% endblock %}
+        
+    <h1>Login</h1>
+{% block page_content %} 
+
+
+please enter your:
+
+
+<form class="form-group" method="POST">
+{{ form.hidden_tag() }}
+{{ form.email.label }}  {{ form.email(class="form-control mr-2") }}
+<br>
+{{ form.password.label }}  {{ form.password(class="form-control mr-2") }}
+New User? <a href="{{ url_for('register')}}">Register</a>
+<br>
+{{ form.submit(class="btn btn-light") }}
+
+</form>
+
+
+{% endblock %}
+</div>
+{% endblock %}
