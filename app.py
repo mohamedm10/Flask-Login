@@ -13,8 +13,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-
-
+### APP CONFIGURATIONS
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'secretpass'
@@ -26,7 +25,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
-
+### MODELS 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -47,7 +46,8 @@ class User(db.Model, UserMixin):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-    
+
+### FORMS ####    
 class RegisterForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired(), EqualTo('password2',message='Passwords must match.')])
@@ -63,6 +63,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+### VIEWS 
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -82,8 +83,8 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             return redirect(url_for('profile'))
-    flash('Invalid email or password')
-    form.email.data = ''        
+        flash('Invalid email or password')    
+        form.email.data = ''
     return render_template('login.html', form=form)    
 
 @app.route('/register', methods=['GET', 'POST'])
